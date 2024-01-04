@@ -7,20 +7,23 @@ window.Webflow.push(() => {
   //Service Overview Section
   console.log("Service Overview Section Initialized");
 
-  document.getElementById("tabsList").onmousemove = (e) => {
-    console.log("Mousemove event triggered on #tabsList");
+  const tabsIds = ["tabsList", "tabsPanels"];
 
-    for (const card of document.getElementsByClassName("tab-link")) {
-      const rect = card.getBoundingClientRect(),
-        x = e.clientX - rect.left,
-        y = e.clientY - rect.top;
+  tabsIds.forEach((tabsId) => {
+    const tabsElement = document.getElementById(tabsId);
+    if (tabsElement) {
+      tabsElement.onmousemove = (e) => {
+        for (const card of document.getElementsByClassName("card")) {
+          const rect = card.getBoundingClientRect(),
+            x = e.clientX - rect.left,
+            y = e.clientY - rect.top;
 
-      console.log("Coordinates on card:", card, "x:", x, "y:", y);
-
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        }
+      };
     }
-  };
+  });
 
   console.log("Service Overview Section Attached Event Listener");
   //Testimonial Section (Infinite Scroll)
