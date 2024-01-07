@@ -58,37 +58,4 @@ window.Webflow.push(() => {
   });
 
   //Testimonial Section (Infinite Scroll)
-  document.addEventListener("DOMContentLoaded", function () {
-    const scrollers = document.querySelectorAll(".infinite-scroller");
-
-    scrollers.forEach((scroller) => {
-      const scrollerInner = scroller.querySelector(".scroller__inner");
-      const scrollerContent = Array.from(scrollerInner.children);
-      let totalWidth = 0;
-
-      // Clone and prepend items
-      scrollerContent
-        .slice()
-        .reverse()
-        .forEach((item) => {
-          const clone = item.cloneNode(true);
-          clone.setAttribute("aria-hidden", "true");
-          scrollerInner.prepend(clone);
-          totalWidth +=
-            item.offsetWidth +
-            parseFloat(getComputedStyle(item).marginLeft) +
-            parseFloat(getComputedStyle(item).marginRight);
-        });
-
-      // Clone and append items
-      scrollerContent.forEach((item) => {
-        const clone = item.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        scrollerInner.appendChild(clone);
-      });
-
-      // Initial scroll position set to the first clone
-      scroller.scrollLeft = totalWidth;
-    });
-  });
 });
